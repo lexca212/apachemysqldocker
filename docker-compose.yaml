@@ -16,7 +16,7 @@ services :
     environment:
       MYSQL_ROOT_PASSWORD: root123
     ports:
-      - "3306:3306"   # optional
+      - 3306:3306   # optional
     volumes:
     #sesuaikan path kiri
       - ./mysql/data:/var/lib/mysql
