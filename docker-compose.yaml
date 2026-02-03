@@ -1,22 +1,55 @@
-version : '3.9'
+version: '3.9'
 
-services :
+services:
   web-app:
     build: .
     container_name: web-app
     ports:
       - 9080:80
     volumes:
-    # Sesuaikan Path Kiri
+      # Sesuaikan path kiri
       - ./src:/var/www/html
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-db
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.5
+    container_name: mariadb-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_ROOT_PASSWORD: pkukota2026
+      TZ: Asia/Jakarta
     ports:
-      - 3306:3306   # optional
+      - 9906:3306   # optional
     volumes:
-    #sesuaikan path kiri
+      # sesuaikan path kiri
       - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+
+
+
+
+
+
+# version : '3.9'
+
+# services :
+#   web-app:
+#     build: .
+#     container_name: web-app
+#     ports:
+#       - 9080:80
+#     volumes:
+#     # Sesuaikan Path Kiri
+#       - ./src:/var/www/html
+#   mysql:
+#     image: mysql:8.0
+#     container_name: mysql-db
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root123
+#     ports:
+#       - 3306:3306   # optional
+#     volumes:
+#     #sesuaikan path kiri
+#       - ./mysql/data:/var/lib/mysql
